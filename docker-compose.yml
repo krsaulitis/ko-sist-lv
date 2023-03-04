@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/app/Dockerfile
+    container_name: kosist-app
+    volumes:
+      - .:/var/www/site
+    depends_on:
+      - db
+    restart: unless-stopped
+  nginx:
+    build:
+      context: .
+      dockerfile: ./.docker/nginx/Dockerfile
+    container_name: kosist-nginx
+    volumes:
+      - .:/var/www/site
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - app
+    restart: unless-stopped
+  db:
+    platform: linux/x86_64
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: kosist
+      MYSQL_ROOT_PASSWORD: kosist
+      MYSQL_USER: kosist
+      MYSQL_PASSWORD: kosist
+    volumes:
+      - kosist-data:/var/lib/mysql
+    restart: unless-stopped
+
+networks:
+  kosist-network:
+    driver: bridge
+
+volumes:
+  kosist-data:
+    driver: local
