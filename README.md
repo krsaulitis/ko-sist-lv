@@ -1,4 +1,4 @@
-# ko-sist-lv
+# Korvadības sistēma - kosist.lv
 
 ## Prerequisites
 1. Download and install Docker from https://www.docker.com/
