@@ -12,8 +12,10 @@ RUN apt-get update && apt-get install -y libmcrypt-dev \
     && docker-php-ext-install pdo \
     && docker-php-ext-install pdo_mysql
 
+# Install Xdebug
 RUN pecl install xdebug;
 COPY ./.docker/app/xdebug.ini /usr/local/etc/php/conf.d
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install
