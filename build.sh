@@ -10,12 +10,12 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 fi
 
 if ! grep -q "kosist.test" "/etc/hosts"; then
-    echo "Adding kosist.test to hosts file"
+    echo "Adding kosist.test to hosts file..."
 
-    if [[ "$platform" == "mac" ]]; then
-        sudo -- sh -c -e "echo '127.0.0.1 kosist.test' >> /etc/hosts";
+    if [[ "$platform" == "win" ]]; then
+        echo '127.0.0.1 kosist.test' >> /etc/hosts || echo "Failed to add kosist.test to hosts file";
     else
-        echo '127.0.0.1 kosist.test' >> /etc/hosts;
+        sudo -- sh -c -e "echo '127.0.0.1 kosist.test' >> /etc/hosts" || echo "Failed to add kosist.test to hosts file";
     fi
 fi
 
@@ -23,5 +23,5 @@ if [ ! -f ".env" ]; then
     cp .env.example .env
 fi
 
-docker-compose up --build -d
+docker compose up --build -d
 docker exec -it kosist-app php artisan migrate
