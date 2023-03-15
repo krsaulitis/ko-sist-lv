@@ -10,7 +10,7 @@ elif [[ "$OSTYPE" == "msys" ]]; then
 fi
 
 if ! grep -q "kosist.test" "/etc/hosts"; then
-    echo "Adding kosist.test to hosts file...";
+    echo "Adding kosist.test to hosts file...";nano
 
     if [[ "$platform" == "win" ]]; then
         echo '127.0.0.1 kosist.test' >> /etc/hosts || echo "Failed to add kosist.test to hosts file";
@@ -24,10 +24,10 @@ if [ ! -f ".env" ]; then
 fi
 
 if [[ "$platform" == "lin" ]]; then
-    sudo systemctl start docker || echo "Failed starting docker" && exit 1;
-    sudo docker-compose up --build -d || sudo docker compose up --build -d || echo "Failed starting container" && exit 1;
+    sudo systemctl start docker || echo "Failed starting docker" exit 1;
+    sudo docker-compose up --build -d || sudo docker compose up --build -d || echo "Failed starting container" exit 1;
 else
-    docker compose up --build -d || echo "Failed starting container" && exit 1;
+    docker compose up --build -d || echo "Failed starting container" exit 1;
 fi
 
 docker exec -it kosist-app php artisan migrate;
