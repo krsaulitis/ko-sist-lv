@@ -23,5 +23,5 @@ if [ ! -f ".env" ]; then
     cp .env.example .env
 fi
 
-docker compose up --build -d
+docker-compose up --build -d || docker compose up --build -d || echo "Failed starting container" && exit 1
 docker exec -it kosist-app php artisan migrate
