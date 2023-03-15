@@ -1,11 +1,17 @@
 # Korvadības sistēma - kosist.lv
 
 ## Prerequisites
+### Windows
 1. Download and install Docker from https://www.docker.com/
+2. Download and install Git for Windows - https://git-scm.com/download/win
+3. All further actions should be done through GitBash terminal
 
-### Windows specific
-1. Download and install Git for Windows - https://git-scm.com/download/win
-2. All further actions should be done through GitBash terminal
+### Linux (Ubuntu)
+1. Install docker using - `sudo apt install docker.io`
+2. Install docker compose using following instructions - https://docs.docker.com/compose/install/linux/
+
+### MacOS
+1. Download and install Docker from https://www.docker.com/
 
 ## Setup
 ### Automatic

@@ -1,16 +1,16 @@
 #!/bin/sh
 
-platform="lin"
+platform="lin";
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    platform="mac"
+    platform="mac";
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-    platform="win"
+    platform="win";
 elif [[ "$OSTYPE" == "msys" ]]; then
-    platform="win"
+    platform="win";
 fi
 
 if ! grep -q "kosist.test" "/etc/hosts"; then
-    echo "Adding kosist.test to hosts file..."
+    echo "Adding kosist.test to hosts file...";
 
     if [[ "$platform" == "win" ]]; then
         echo '127.0.0.1 kosist.test' >> /etc/hosts || echo "Failed to add kosist.test to hosts file";
@@ -23,5 +23,11 @@ if [ ! -f ".env" ]; then
     cp .env.example .env
 fi
 
-docker-compose up --build -d || docker compose up --build -d || echo "Failed starting container" && exit 1
-docker exec -it kosist-app php artisan migrate
+if [[ "$platform" == "lin" ]]; then
+    sudo systemctl start docker || echo "Failed starting docker" && exit 1;
+    sudo docker-compose up --build -d || sudo docker compose up --build -d || echo "Failed starting container" && exit 1;
+else
+    docker compose up --build -d || echo "Failed starting container" && exit 1;
+fi
+
+docker exec -it kosist-app php artisan migrate;
