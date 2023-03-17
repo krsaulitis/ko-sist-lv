@@ -6,9 +6,12 @@
 2. Download and install Git for Windows - https://git-scm.com/download/win
 3. All further actions should be done through GitBash terminal
 
-### Linux (Ubuntu)
-1. Install docker using - `sudo apt install docker.io`
-2. Install docker compose using following instructions - https://docs.docker.com/compose/install/linux/
+### Linux
+1. Install docker using - `sudo apt install docker.io` (<b>Only Ubuntu/Debian</b>) For other distros follow: https://docs.docker.com/desktop/linux/install/
+2. (<b>If `docker compose` doesn't work</b>) Install docker compose using following instructions - https://docs.docker.com/compose/install/linux/
+3. Set up permissions for Docker if needed:
+    - `sudo usermod -a -G docker [user_name]`
+    - `newgrp docker`
 
 ### MacOS
 1. Download and install Docker from https://www.docker.com/
