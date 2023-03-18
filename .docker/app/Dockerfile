@@ -6,11 +6,12 @@ WORKDIR /var/www/site
 RUN apt-get update && apt-get install -y libmcrypt-dev \
     nodejs npm git zip unzip nano \
     default-mysql-client libmagickwand-dev --no-install-recommends \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick \
-    && docker-php-ext-install mysqli \
-    && docker-php-ext-install pdo \
-    && docker-php-ext-install pdo_mysql
+
+RUN pecl install imagick
+RUN docker-php-ext-enable imagick
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pdo
+RUN docker-php-ext-install pdo_mysql
 
 # Install Xdebug
 RUN pecl install xdebug;
