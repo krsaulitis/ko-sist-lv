@@ -22,11 +22,14 @@
 2. Open https://kosist.test or https://localhost/ from browser of choice
 
 ### Manual
-1. Run `docker-compose up --build -d`
-2. Connect to docker instance `docker exec -it kosist-app /bin/bash`
-3. Run `composer install`
-4. Run `php artisan migrate`
-5. Open https://localhost/ from browser of choice
+1. Run `docker compose build --no-cache`
+2. Run `docker compose up -d`
+3. Connect to docker instance `docker exec -it kosist-app /bin/bash`
+4. Copy .env variables `cp .env.example .env`
+5. Run `composer install`
+6. Copy .env.example .env 
+7. Run `php artisan migrate`
+8. Open https://localhost/ from browser of choice
 
 #### * Additional (optional) config
 1. Edit `/etc/hosts` (Linux or macOS) or `C:\Windows\System32\drivers\etc\hosts` (Windows)

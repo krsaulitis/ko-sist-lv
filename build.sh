@@ -24,10 +24,13 @@ if [ ! -f ".env" ]; then
 fi
 
 if [[ "$platform" == "lin" ]]; then
-    sudo systemctl start docker || echo "Failed starting docker" exit 1;
-    sudo docker-compose up --build -d || sudo docker compose up --build -d || echo "Failed starting container" exit 1;
+    sudo systemctl start docker || echo "Failed starting docker service" exit 1;
+    sudo docker compose build || echo "Container build failed" exit 1;
+    sudo docker compose up -d || echo "Failed to start container" exit 1;
 else
-    docker compose up --build -d || echo "Failed starting container" exit 1;
+    docker compose build || echo "Container build failed" exit 1;
+    docker compose up -d || echo "Failed to start container" exit 1;
 fi
 
+docker exec -it kosist-app composer install
 docker exec -it kosist-app php artisan migrate;
