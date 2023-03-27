@@ -30,11 +30,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item"><a class="nav-link" href="{{ route('calendar-view') }}">Kalendārs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('resources-view') }}">Resursi</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('submissions-view') }}">Pieteikumi</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('users-view') }}">Lietotāji</a></li>
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

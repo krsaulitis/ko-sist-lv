@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Calendar\CalendarController;
+use App\Http\Controllers\Resources\ResourcesController;
+use App\Http\Controllers\Submissions\SubmissionsController;
+use App\Http\Controllers\Users\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +18,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Auth::routes();
+Route::prefix('/resources')->group(function () {
+    Route::get('', [ResourcesController::class, 'index'])->name('resources-view');
+});
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('/calendar')->group(function () {
+    Route::get('', [CalendarController::class, 'index'])->name('calendar-view');
+});
+
+Route::prefix('/submissions')->group(function () {
+    Route::get('', [SubmissionsController::class, 'index'])->name('submissions-view');
+});
+
+Route::prefix('/users')->group(function () {
+    Route::get('', [UsersController::class, 'index'])->name('users-view');
+});

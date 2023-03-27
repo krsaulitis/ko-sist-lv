@@ -26,6 +26,7 @@ services:
     restart: unless-stopped
   db:
     image: mysql:8
+    container_name: kosist-db
     ports:
       - "3306:3306"
     environment:

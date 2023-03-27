@@ -25,11 +25,12 @@
 1. Run `docker compose build --no-cache`
 2. Run `docker compose up -d`
 3. Connect to docker instance `docker exec -it kosist-app /bin/bash`
-4. Copy .env variables `cp .env.example .env`
-5. Run `composer install`
-6. Copy .env.example .env 
-7. Run `php artisan migrate`
-8. Open https://localhost/ from browser of choice
+4. Copy .env.example to .env `cp .env.example .env`
+5. Install required php packages - run `composer install`
+6. Install required npm packages - run `npm install`
+7. Set up database - run `php artisan migrate`
+8. Build frontend - run `npm run build`
+9. Open https://localhost/ from browser of choice
 
 #### * Additional (optional) config
 1. Edit `/etc/hosts` (Linux or macOS) or `C:\Windows\System32\drivers\etc\hosts` (Windows)
