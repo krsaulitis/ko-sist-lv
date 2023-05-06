@@ -27,6 +27,10 @@ Route::prefix('/resources')->group(function () {
 
 Route::prefix('/calendar')->group(function () {
     Route::get('', [CalendarController::class, 'index'])->name('calendar-view');
+    Route::get('/events', [CalendarController::class, 'list'])->name('list-events');
+    Route::post('/events', [CalendarController::class, 'create'])->name('create-event');
+    Route::put('/events/{id}', [CalendarController::class, 'update'])->name('update-event');
+    Route::delete('/events/{id}', [CalendarController::class, 'delete'])->name('delete-event');
 });
 
 Route::prefix('/submissions')->group(function () {
