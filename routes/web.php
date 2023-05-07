@@ -44,6 +44,9 @@ Route::prefix('/calendar')->group(function () {
 
 Route::prefix('/submissions')->group(function () {
     Route::get('', [SubmissionsController::class, 'index'])->name('submissions-view');
+    Route::post('/submissions', [SubmissionsController::class, 'create'])->name('create-submission');
+    Route::put('/submissions/{id}', [SubmissionsController::class, 'update'])->name('update-submission');
+    Route::delete('/submissions/{id}', [SubmissionsController::class, 'delete'])->name('delete-submission');
 });
 
 Route::prefix('/users')->group(function () {

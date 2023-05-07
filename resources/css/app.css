@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url(https://fonts.googleapis.com/css?family=Poiret+One);
+
+.btn {
+    color:rgb(66, 87, 204);
+    text-decoration:none;
+    padding:5px 10px;
+    border-radius:3px;
+    font-size:2em;
+}
