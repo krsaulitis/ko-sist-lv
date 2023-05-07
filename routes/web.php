@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Calendar\CalendarController;
+use App\Http\Controllers\Resources\ResourcesController;
+use App\Http\Controllers\Submissions\SubmissionsController;
+use App\Http\Controllers\Users\UsersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
