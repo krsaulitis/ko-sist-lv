@@ -36,3 +36,5 @@
 1. Edit `/etc/hosts` (Linux or macOS) or `C:\Windows\System32\drivers\etc\hosts` (Windows)
 2. Add `127.0.0.1 kosist.test` at the end of the file
 3. Open https://kosist.test from browser of choice
+
+php artisan serve
