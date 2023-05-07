@@ -23,6 +23,10 @@ Route::get('/', function () {
 
 Route::prefix('/resources')->group(function () {
     Route::get('', [ResourcesController::class, 'index'])->name('resources-view');
+    Route::get('/resources', [CResourcesController::class, 'list'])->name('list-resources');
+    Route::post('/resources', [ResourcesController::class, 'create'])->name('create-resource');
+    Route::put('/resources/{id}', [ResourcesController::class, 'update'])->name('update-resource');
+    Route::delete('/resources/{id}', [ResourcesController::class, 'delete'])->name('delete-resource');
 });
 
 Route::prefix('/calendar')->group(function () {
