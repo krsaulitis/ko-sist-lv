@@ -17,35 +17,20 @@ class ResourcesController extends Controller
 
         return view('resources/view', ['resource'=> $resources]);
     }
-    // public function store(Request $request)
-    // {
-    //    $request->validate([
-    //     'name' => 'required:max:255',
-    //     'file_path' => 'required'
-    //   ]);
-
-    //   auth()->user()->files()->create([
-    //     'name' => $request->get('title'),
-    //     'file_path' => $request->get('overview')
-    //   ]);
-
-    //   return back()->with('message', 'Jūsu resursu fails ir augšupielādēts veiksmīgi');
-    // }
-
-    public function create(ResourceCreateRequest $request): JsonResponse
+    public function store(Request $request)
     {
         $resource = new Resource();
         $resource->name = $request->name;
         $resource->file_path = $request->file_path;
 
         if (!$resource->save()) {
-            return response()->json(['success' => false, 'message' => 'Failed to uploade the file']);
+            return response()->json(['success' => false, 'message' => 'Failed to upload the file']);
         }
 
         return response()->json(['success' => true, 'data' => $resource->toArray()]);
     }
 
-    public function list(ResourceListRequest $request): JsonResponse
+    public function list(Request $request)
     {
         $name = $request->name;
         $file_path = $request->file_path;
@@ -59,7 +44,7 @@ class ResourcesController extends Controller
         return response()->json($resources);
     }
 
-    public function delete(int $id): JsonResponse
+    public function delete(int $id)
     {
         $resource = Resource::query()->find($id);
 
@@ -68,6 +53,22 @@ class ResourcesController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+
+
+    public function update(Request $request, int $id)
+    {
+        $resource = Resource::query()->find($id);
+
+        $resource->name = $request->name;
+        $resource->file_path = $request->file_path;
+
+        if (!$resource->save()) {
+            return response()->json(['success' => false, 'message' => 'Failed to update the resource']);
+        }
+
+        return response()->json(['success' => true, 'data' => $resource->toArray()]);
     }
 }
 

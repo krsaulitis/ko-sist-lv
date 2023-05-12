@@ -20,4 +20,5 @@ class ResourceCreateRequest extends Controller
             'name' => 'required|string|max:255',
             'file_path' => 'required|string|max:255'];
     }
+
 }
