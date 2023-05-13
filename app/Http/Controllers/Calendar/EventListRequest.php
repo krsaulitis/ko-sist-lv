@@ -20,4 +20,5 @@ class EventListRequest extends Request
             'end' => "required|date_format:$datetimeFormat",
         ];
     }
+
 }
