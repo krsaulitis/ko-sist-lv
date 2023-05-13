@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Submissions;
 use App\Http\Controllers\Shared\Controller;
 use Illuminate\Contracts\Support\Renderable;
 
-class SubmissionsController extends Controller
+class AuditionSubmissionsController extends Controller
 {
     public function index(): Renderable
     {
@@ -15,7 +15,23 @@ class SubmissionsController extends Controller
     }
     public function create()
     {
-        return view('submissions/view', ['test' => ['a', 'b']]);
+        $audition_submission = new Event();
+        $audition_submission->name = $request->name;
+        $audition_submission->surname = $request->surname;
+        if ($request->motivation != NULL) {
+            $audition_submission->motivation = $request->motivation;
+        }
+        $audition_submission->phone_number = $request->phone_number;
+        if ($request->experience != NULL) {
+            $audition_submission->experience = $request->experience;
+        }
+        $audition_submission->email = $request->email;
+
+        if (!$audition_submission->save()) {
+            return response()->json(['success' => false, 'message' => 'Failed to save the audition_submission']);
+        }
+
+        return response()->json(['success' => true, 'data' => $audition_submission->toArray()]);
     }
     public function edit()
     {
