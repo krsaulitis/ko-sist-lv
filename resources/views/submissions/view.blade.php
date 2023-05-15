@@ -7,18 +7,18 @@
             <div class="card">
                 <div class="card-header">Pieteikumi</div>
                 <div class="card-body">
-                    @foreach($test as $data)
+                    @foreach($audition_submissions as $submission)
                         <div class="card m-t-5">
                             <div class="row">
-                                <div class="col">{{$data[0]}} {{$data[1]}}</div>
-                                <div class="col">E-pasts: {{$data[2]}}</div>
-                                <div class="col">Telefona nr: {{$data[3]}}</div>
+                                <div class="col">{{$submission->name}} {{$submission->surname}}</div>
+                                <div class="col">E-pasts: {{$submission->email}}</div>
+                                <div class="col">Telefona nr: {{$submission->phone_number}}</div>
                             </div>
                             <div>Iepriekšējā pieredze</div>
-                            <div>{{$data[4]}}</div>
+                            <div>{{$submission->experience}}</div>
                             <br>
                             <div>Motivācijas vēstule</div>
-                            <div>{{$data[5]}}</div>
+                            <div>{{$submission->motivation}}</div>
                             <div class="row">
                                 <a href="#" class="btn">Dzēst</a>
                                 <a href="#" class="btn">Apstiprināt</a>

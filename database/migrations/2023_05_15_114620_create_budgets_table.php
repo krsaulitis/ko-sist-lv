@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lesson_submissions', function (Blueprint $table) {
+        Schema::create('budgets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users'); //->onDelete('cascade'); Vai šo vajag?
-            $table->unsignedBigInteger('lecturer_id')->nullable();
-            $table->foreign('lecturer_id')->references('id')->on('users'); // Pārbaudīt vai lecturer, vai jābūt savādāk
-            $table->string('status', 50);
-            $table->time('recommended_time');
+            $table->unsignedBigInteger('to_pay');
+            $table->string('description', 200)->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lesson_submissions');
+        Schema::dropIfExists('budgets');
     }
 };
