@@ -18,4 +18,6 @@ class AuditionSubmission extends Model
         'experience',
         'email'
     ];
+
+    protected $table = 'audition_submissions';
 }

@@ -11,7 +11,7 @@ class AuditionSubmissionsController extends Controller
 {
     public function index(): Renderable
     {
-        $audition_submissions = DB::select('select * from audition_submissions');
+        $audition_submissions =  AuditionSubmission::all();
         return view('submissions/view',['audition_submissions'=>$audition_submissions]);
     }
     public function create()
