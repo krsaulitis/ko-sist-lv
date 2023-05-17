@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users'); //->onDelete('cascade'); Vai šo vajag?
+            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
             $table->unsignedBigInteger('to_pay');
             $table->string('description', 200)->nullable();
             $table->timestamps();
