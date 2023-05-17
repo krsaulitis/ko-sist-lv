@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('lesson_submissions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users'); //->onDelete('cascade'); Vai šo vajag?
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->unsignedBigInteger('lecturer_id')->nullable();
-            $table->foreign('lecturer_id')->references('id')->on('users'); // Pārbaudīt vai lecturer, vai jābūt savādāk
+            $table->foreign('lecturer_id')->references('id')->on('users');
             $table->string('status', 50);
             $table->time('recommended_time');
             $table->timestamps();
