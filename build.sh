@@ -12,9 +12,9 @@ fi
 if ! grep -q "kosist.test" "/etc/hosts"; then
     echo "Adding kosist.test to hosts file...";nano
 
-    if [[ "$platform" == "win" ]]; then
-        echo '127.0.0.1 kosist.test' >> /etc/hosts || echo "Failed to add kosist.test to hosts file";
-    else
+    if [[ "$platform" != "win" ]]; then
+    #     echo '127.0.0.1 kosist.test' >> /etc/hosts || echo "Failed to add kosist.test to hosts file"; Doesn't work for windows
+    # else
         sudo -- sh -c -e "echo '127.0.0.1 kosist.test' >> /etc/hosts" || echo "Failed to add kosist.test to hosts file";
     fi
 fi

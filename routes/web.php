@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Calendar\CalendarController;
 use App\Http\Controllers\Resources\ResourcesController;
-use App\Http\Controllers\Submissions\SubmissionsController;
+use App\Http\Controllers\Submissions\AuditionSubmissionsController;
 use App\Http\Controllers\Users\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('submissions/create');
 });
 
 Route::prefix('/resources')->group(function () {
@@ -34,7 +34,10 @@ Route::prefix('/calendar')->group(function () {
 });
 
 Route::prefix('/submissions')->group(function () {
-    Route::get('', [SubmissionsController::class, 'index'])->name('submissions-view');
+    Route::get('', [AuditionSubmissionsController::class, 'index'])->name('submissions-view');
+    Route::post('/submissions', [AuditionSubmissionsController::class, 'create'])->name('create-submission');
+    Route::put('/submissions/{id}', [AuditionSubmissionsController::class, 'update'])->name('update-submission');
+    Route::delete('/submissions/{id}', [AuditionSubmissionsController::class, 'delete'])->name('delete-submission');
 });
 
 Route::prefix('/users')->group(function () {
