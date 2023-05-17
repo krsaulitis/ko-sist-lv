@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('audition_submissions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('conductor_id')->nullable();
-            $table->foreign('conductor_id')->references('id')->on('users'); //->onDelete('cascade'); Vai šo vajag?
+            $table->foreign('conductor_id')->references('id')->on('users')->nullOnDelete();
             $table->string('name', 50);
             $table->string('surname', 50);
             $table->string('motivation', 1000)->nullable();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('status', 50)->nullable();
             $table->string('experience', 1000)->nullable();
             $table->string('email');
-            $table->timestamps(); // Vai šo vajag?
+            $table->timestamps();
         });
     }
 
