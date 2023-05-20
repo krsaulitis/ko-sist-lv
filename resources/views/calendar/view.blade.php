@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<style>
-    a{
-        color: white;
-        text-decoration: none;
-    }
-</style>
+
     <!-- Fullcalendar -->
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.5/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.5/index.global.min.js'></script>
@@ -19,8 +13,6 @@
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
     <script>
-
-
         document.addEventListener('DOMContentLoaded', function () {
             const calendarEl = document.getElementById('calendar');
             var btn;
@@ -144,8 +136,6 @@
                 timeout: 8000
             })
         });
-
-
     </script>
     <div class="container">
         <div class="row justify-content-center">
@@ -172,21 +162,21 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label for="event_name">Nosaukums</label>
-                                                        <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Enter your event name">
+                                                        <input type="text" name="title" id="title" class="form-control" placeholder="Enter your event name">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="event_start_date">Sākuma datums</label>
-                                                        <input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date">
+                                                        <label for="start">Sākuma datums</label>
+                                                        <input type="date" name="start" id="start" class="form-control onlydatepicker" placeholder="Event start date">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="event_end_date">Beigu datums</label>
-                                                        <input type="date" name="event_end_date" id="event_end_date" class="form-control" placeholder="Event end date">
+                                                        <label for="end">Beigu datums</label>
+                                                        <input type="date" name="end" id="end" class="form-control" placeholder="Event end date">
                                                     </div>
                                                 </div>
                                             </div>

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Calendar;
 use App\Http\Controllers\Shared\Controller;
 use App\Models\Event;
 use DateTime;
+use DateTimeInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
@@ -61,4 +63,28 @@ class CalendarController extends Controller
     {
 
     }
+
+    public function addEvent(Request $request): JsonResponse
+    {
+        $datetimeFormat = DateTimeInterface::ATOM;
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'comment' => 'string|max:500',
+            'start' => "required|date_format:$datetimeFormat",
+            'end' => "required|date_format:$datetimeFormat",
+        ]);
+
+        $event = new Event();
+        $event->title = request('title');
+        $event->comment = request ('comment');
+        $event->start = request ('start');
+        $event->end = request ('end');
+
+        if (!$event->save()) {
+            return response()->json(['success' => false, 'message' => 'Failed to save the event']);
+        }
+
+        return response()->json(['success' => true, 'data' => $event->toArray()]);
+    }
+
 }
