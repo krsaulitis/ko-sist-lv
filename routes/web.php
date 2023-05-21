@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Calendar\CalendarController;
+use App\Http\Controllers\Events\EventsController;
 use App\Http\Controllers\Resources\ResourcesController;
 use App\Http\Controllers\Submissions\AuditionSubmissionsController;
 use App\Http\Controllers\Users\UsersController;
@@ -18,19 +18,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('submissions/create');
+    return view('home');
 });
 
 Route::prefix('/resources')->group(function () {
-    Route::get('', [ResourcesController::class, 'index'])->name('resources-view');
+    Route::get('', [ResourcesController::class, 'list'])->name('resources-list');
+    Route::get('/create', [ResourcesController::class, 'create'])->name('resources-create');
+    Route::get('/{id}', [ResourcesController::class, 'view'])->name('resources-view');
+    Route::get('/{id}/edit', [ResourcesController::class, 'edit'])->name('resources-edit');
 });
 
 Route::prefix('/calendar')->group(function () {
-    Route::get('', [CalendarController::class, 'index'])->name('calendar-view');
-    Route::get('/events', [CalendarController::class, 'list'])->name('list-events');
-    Route::post('/events', [CalendarController::class, 'create'])->name('create-event');
-    Route::put('/events/{id}', [CalendarController::class, 'update'])->name('update-event');
-    Route::delete('/events/{id}', [CalendarController::class, 'delete'])->name('delete-event');
+    Route::get('', [EventsController::class, 'list'])->name('events-list');
+    Route::get('/events/create', [EventsController::class, 'create'])->name('events-create');
+    Route::get('/events/{id}', [EventsController::class, 'view'])->name('events-view');
+    Route::get('/events/{id}/edit', [EventsController::class, 'edit'])->name('events-edit');
 });
 
 Route::prefix('/submissions')->group(function () {

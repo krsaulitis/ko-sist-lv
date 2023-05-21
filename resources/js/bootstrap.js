@@ -1,4 +1,5 @@
 import 'bootstrap';
+import 'bootstrap-icons/font/bootstrap-icons.min.css';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
