@@ -32,5 +32,6 @@ docker compose up -d || echo "Failed to start container" exit 1;
 
 docker exec -it kosist-app composer install
 docker exec -it kosist-app php artisan migrate;
+docker exec -it kosist-app php artisan db:seed --class=statusTableSeeder;
 docker exec -it kosist-app npm install
 docker exec -it kosist-app npm run build
