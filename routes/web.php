@@ -29,8 +29,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::redirect('/home', '/calendar')->name('home');
-
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/password/change', [AuthController::class, 'change'])->name('password-change');
 
