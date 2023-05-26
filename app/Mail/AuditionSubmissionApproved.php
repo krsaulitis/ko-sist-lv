@@ -12,7 +12,7 @@ class AuditionSubmissionApproved extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public readonly string $password)
+    public function __construct(public readonly string $hash, public readonly string $password)
     {
 
     }

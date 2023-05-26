@@ -42,17 +42,17 @@ class AuditionSubmission extends Model
         return "$this->name $this->surname";
     }
 
-    public function approve(): self
+    public function approve(): bool
     {
         $this->status = self::STATUS_APPROVED;
 
-        return $this;
+        return $this->save();
     }
 
-    public function reject(): self
+    public function reject(): bool
     {
         $this->status = self::STATUS_REJECTED;
 
-        return $this;
+        return $this->save();
     }
 }

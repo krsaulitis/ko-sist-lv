@@ -24,17 +24,15 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'login'])->name('base');
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::get('/{hash}/confirm', [AuthController::class, 'confirm'])->name('confirm');
     Route::get('/thanks', [AuthController::class, 'thanks'])->name('thanks');
 });
 
-Route::controller(LoginRegisterController::class)->group(function () {
-    Route::post('/authenticate', 'authenticate')->name('authenticate');
-    Route::post('/logout', 'logout')->name('logout');
-});
-
 Route::middleware('auth')->group(function () {
-    Route::get('logout');
     Route::redirect('/home', '/calendar')->name('home');
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/password/change', [AuthController::class, 'change'])->name('password-change');
 
     Route::prefix('/resources')->group(function () {
         Route::get('', [ResourcesController::class, 'list'])->name('resources-list');

@@ -30,6 +30,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthApiController::class, 'logout'])->name('api-auth-logout');
+    Route::post('/password/change', [AuthApiController::class, 'change'])->name('api-auth-password-change');
 
     Route::prefix('/resources')->group(function () {
         Route::post('/create', [ResourcesApiController::class, 'create'])->name('api-resources-create');

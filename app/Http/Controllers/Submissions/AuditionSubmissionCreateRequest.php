@@ -24,7 +24,7 @@ class AuditionSubmissionCreateRequest extends Request
             'motivation' => 'required|string|max:1000',
             'phone_number' => 'required|string|max:12',
             'experience' => 'required|string|max:1000',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
         ];
     }
 }

@@ -9,8 +9,8 @@ use App\Models\AuditionSubmission;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -41,7 +41,7 @@ class AuditionSubmissionsApiController extends Controller
         /** @var AuditionSubmission $submission */
         $submission = AuditionSubmission::query()->find($id);
 
-        if (!$submission->reject()->save()) {
+        if (!$submission->reject()) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Failed to approve submission']);
         }
@@ -62,7 +62,7 @@ class AuditionSubmissionsApiController extends Controller
 
         /** @var AuditionSubmission $submission */
         $submission = AuditionSubmission::query()->find($id);
-        if (!$submission->approve()->save()) {
+        if (!$submission->approve()) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Failed to approve submission']);
         }
@@ -73,14 +73,16 @@ class AuditionSubmissionsApiController extends Controller
         $user->name = "$submission->name $submission->surname";
         $user->email = $submission->email;
         $user->phone = $submission->phone_number;
-        $user->password = Hash::make($plainPassword);
+        $user->setPassword($plainPassword);
 
         if (!$user->save()) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Failed to save user']);
         }
 
-        if (Mail::to($user->email)->send(new AuditionSubmissionApproved($plainPassword))) {
+        $userHash = Crypt::encrypt($user->email);
+
+        if (Mail::to($user->email)->send(new AuditionSubmissionApproved($userHash, $plainPassword))) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Failed to send email']);
         }

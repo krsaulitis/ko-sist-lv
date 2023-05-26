@@ -6,7 +6,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-xl-6 col-lg-8 col-md-10 col-12">
                 <div class="row card">
-                    <div class="card-header">Reģistrācija</div>
+                    <div class="card-header">Pieteikuma izveide</div>
                     <div class="card-body">
                         <form action="{{ route('api-auth-register') }}" method="post">
                             @csrf
@@ -76,7 +76,7 @@
                                     pieredze</label>
                                 <div class="col-md-6">
                                     <textarea id="experience" name="experience"
-                                              class="form-control">{{ old('experience') }}</textarea>
+                                              class="form-control @error('experience') is-invalid @enderror">{{ old('experience') }}</textarea>
                                     @if ($errors->has('experience'))
                                         <span class="text-danger">{{ $errors->first('experience') }}</span>
                                     @endif
@@ -87,7 +87,7 @@
                                     vēstule</label>
                                 <div class="col-md-6">
                                     <textarea id="motivation" name="motivation"
-                                              class="form-control">{{ old('motivation') }}</textarea>
+                                              class="form-control @error('motivation') is-invalid @enderror">{{ old('motivation') }}</textarea>
                                     @if ($errors->has('motivation'))
                                         <span class="text-danger">{{ $errors->first('motivation') }}</span>
                                     @endif

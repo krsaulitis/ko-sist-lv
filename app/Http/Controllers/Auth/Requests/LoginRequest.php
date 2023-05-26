@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth\Requests;
 
 use App\Http\Controllers\Shared\Request;
 
