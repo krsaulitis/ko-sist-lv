@@ -20,8 +20,8 @@ use App\Models\Resource;
                               enctype="multipart/form-data"
                               action="{{ $resource ? route('api-resources-update', ['id' => $resource->id]) : route('api-resources-create') }}">
                             @csrf
+                            @method($resource ? 'put' : 'post')
 
-                            <input hidden id="_method" name="_method" value="{{ $resource ? 'put' : 'post' }}">
                             <div class="col-md-6">
                                 <label class="form-label"
                                        for="title">Nosukums</label>
@@ -45,10 +45,12 @@ use App\Models\Resource;
                                     <span class="text-danger">{{ $errors->first('file') }}</span>
                                 @endif
                             </div>
-
                             <div class="col">
                                 <button type="submit" class="btn btn-primary">Saglabāt</button>
                             </div>
+                            @if ($errors->has('general'))
+                                <span class="text-danger">{{ $errors->first('general') }}</span>
+                            @endif
                         </form>
                     </div>
                 </div>

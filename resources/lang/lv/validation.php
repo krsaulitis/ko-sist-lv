@@ -188,5 +188,7 @@ return [
         'motivation' => '"Motivācijas vēstules"',
         'password' => 'Paroles',
         'current_password' => 'Esošās paroles',
+        'title' => 'Nosaukuma',
+        'description' => 'Apraksta',
     ],
 ];

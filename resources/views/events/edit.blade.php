@@ -23,46 +23,84 @@ use App\Models\Event;
                     <div class="card-header">{{$event?->title ?? 'Jauns notikums'}}</div>
                     <div class="card-body">
                         <form class="row g-3 needs-validation"
-                              action="{{ $event ? route('api-events-update', ['id' => $event->id]) : route('api-events-create') }}"
-                              enctype="multipart/form-data">
+                              method="post"
+                              action="{{ $event ? route('api-events-update', ['id' => $event->id]) : route('api-events-create') }}">
                             @csrf
+                            @method($event ? 'put' : 'post')
 
                             <div class="col-sm-6">
                                 <label class="form-label" for="title">Nosukums</label>
-                                <input type="text" class="form-control" id="title" name="title"
-                                       value="{{$event?->title}}">
+                                <input type="text"
+                                       class="form-control @error('title') is-invalid @enderror"
+                                       id="title"
+                                       name="title"
+                                       value="{{old('title') ?? $event?->title}}">
+
+                                @if ($errors->has('title'))
+                                    <span class="text-danger">{{ $errors->first('title') }}</span>
+                                @endif
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label" for="dates">Laiks</label>
-                                <input class="form-control" name="dates" id="dates"/>
+                                <input class="form-control @error('datetime_from') is-invalid @enderror"
+                                       name="dates"
+                                       value="{{old('date')}}"
+                                       id="dates"/>
+
+                                <label>
+                                    <input hidden id="datetime_from" name="datetime_from"
+                                           value="{{ old('datetime_from') }}">
+                                </label>
+                                <label>
+                                    <input hidden id="datetime_to" name="datetime_to" value="{{ old('datetime_to') }}">
+                                </label>
+
+                                @if ($errors->has('datetime_from') || $errors->has('datetime_to'))
+                                    <span
+                                        class="text-danger">{{ $errors->first('datetime_from') ?? $errors->first('datetime_to') }}</span>
+                                @endif
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label" for="description">Apraksts</label>
                                 <textarea type="text"
                                           id="description"
-                                          class="form-control"
+                                          class="form-control @error('description') is-invalid @enderror"
                                           name="description"
                                           rows="4"
-                                          style="min-height: 80px; max-height: 140px">{{$event?->description}}</textarea>
+                                          style="min-height: 80px; max-height: 140px">{{old('description') ?? $event?->description}}</textarea>
+                                @if ($errors->has('description'))
+                                    <span class="text-danger">{{ $errors->first('description') }}</span>
+                                @endif
                             </div>
 
                             <div class="col-sm-6">
                                 <label class="form-label" for="resources">Resursi</label>
-                                <select name="resources" id="resources" class="form-select" multiple>
+                                <select name="resources[]" id="resources"
+                                        class="form-control @error('resources') is-invalid @enderror"
+                                        multiple>
                                     @foreach($resources as $id => $resource)
+                                        @php
+                                            $isSelected = in_array($id, old('resources', [])) || $event?->hasResourceById($id);
+                                        @endphp
                                         <option value="{{$id}}"
-                                            {{$event?->hasResourceById($id) ? 'selected' : ''}}>
+                                            {{$isSelected ? 'selected' : ''}}>
                                             {{$resource}}
                                         </option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('resources'))
+                                    <span class="text-danger">{{ $errors->first('resources') }}</span>
+                                @endif
                             </div>
 
                             <div class="col">
                                 <button type="submit" class="btn btn-primary">Saglabāt</button>
                             </div>
+                            @if ($errors->has('general'))
+                                <span class="text-danger">{{ $errors->first('general') }}</span>
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -71,6 +109,9 @@ use App\Models\Event;
     </div>
     <script>
         $(document).ready(function () {
+            const dateFromInput = $('#datetime_from');
+            const dateToInput = $('#datetime_to');
+
             $('#resources').select2();
 
             $('input[name="dates"]').daterangepicker({
@@ -80,52 +121,17 @@ use App\Models\Event;
                 endDate: "{{ $event?->datetime_to ?? date('Y-m-d H:i:s') }}",
                 locale: {
                     format: 'Y-MM-D HH:mm'
-                }
+                },
+
             });
             const datepicker = $('input[name="dates"]').data('daterangepicker');
 
             document.querySelector('form')
                 .addEventListener('submit', async function (e) {
-                    e.preventDefault();
-
-                    const form = e.target;
-                    const formData = new FormData(form);
-
-                    let response;
-
-                    try {
-                        const request = {
-                            title: formData.get('title'),
-                            description: formData.get('description'),
-                            dates: {
-                                from: datepicker.startDate.format('Y-MM-D HH:mm:ss'),
-                                to: datepicker.endDate.format('Y-MM-D HH:mm:ss'),
-                            },
-                            resources: $('#resources').select2('data').map((option) => option.id),
-                        };
-                        const rawResponse = await fetch(form.action, {
-                            method: "{{ $event ? 'PUT' : 'POST' }}",
-                            body: JSON.stringify(request),
-                            headers: {"content-type": "application/json",},
-                        });
-
-                        response = await rawResponse.json();
-                    } catch (e) {
-                        console.error(e);
-                        // todo: display error
-                        return;
-                    }
-
-                    if (!response.success) {
-                        // todo: display error
-                        console.error(response.message);
-                    }
-
-                    console.log(response);
-                    window.location.href = "<?= route('events-view', ['id' => 'id']) ?>".replace('id', response.data.id);
+                    dateFromInput.val(datepicker.startDate.format('Y-MM-D HH:mm:ss'));
+                    dateToInput.val(datepicker.endDate.format('Y-MM-D HH:mm:ss'))
                 });
         });
-
     </script>
 @endsection
 
