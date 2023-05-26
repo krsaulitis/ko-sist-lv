@@ -44,19 +44,23 @@ use Illuminate\Support\Facades\Storage;
                                             MB
                                         </td>
                                         <td style="width: 160px">
+                                            @role('admin')
                                             <a href="{{ route('resources-edit', ['id' => $resource->id]) }}"
                                                class="btn btn-secondary">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
+                                            @endrole
                                             <a href="{{ Storage::url($resource->path) }}"
                                                download
                                                class="btn btn-primary">
                                                 <i class="bi bi-download"></i>
                                             </a>
+                                            @role('admin')
                                             <button data-id="{{ $resource->id }}"
                                                     class="btn btn-danger delete-action">
                                                 <i class="bi bi-trash"></i>
                                             </button>
+                                            @endrole
                                         </td>
                                     </tr>
                                 @endforeach

@@ -46,7 +46,7 @@ class AuthController extends Controller
             abort(404);
         }
 
-        if ($user->markEmailAsVerified()) {
+        if (!$user->markEmailAsVerified()) {
             abort(500);
         }
 

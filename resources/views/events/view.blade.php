@@ -36,16 +36,14 @@ use App\Models\Event;
                     </div>
                 </div>
 
-                <div class="row mt-3">
-                    <div class="offset-md-8 col-md-2">
-                        <a href="<?= route('events-edit', ['id' => $event->id]) ?>"
-                           class="btn btn-primary">Labot</a>
-                    </div>
-                    <div class="col-md-2">
-                        <a id="delete" href="javascript:"
-                           class="btn btn-danger">Dzēst</a>
-                    </div>
+                @role('admin')
+                <div class="row mt-3 d-flex flex-row justify-content-end gap-3">
+                    <a id="delete" href="javascript:"
+                       class="btn btn-outline-danger w-auto">Dzēst</a>
+                    <a href="<?= route('events-edit', ['id' => $event->id]) ?>"
+                       class="btn btn-primary w-auto">Labot</a>
                 </div>
+                @endrole
             </div>
         </div>
     </div>

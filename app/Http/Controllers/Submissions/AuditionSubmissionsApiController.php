@@ -82,7 +82,7 @@ class AuditionSubmissionsApiController extends Controller
 
         $userHash = Crypt::encrypt($user->email);
 
-        if (Mail::to($user->email)->send(new AuditionSubmissionApproved($userHash, $plainPassword))) {
+        if (!Mail::to($user->email)->send(new AuditionSubmissionApproved($userHash, $plainPassword))) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'Failed to send email']);
         }

@@ -7,7 +7,7 @@
                 <div class="row card">
                     <div class="card-header">Apsveicam!</div>
                     <div class="card-body">
-                        <p>E-pasts veiksmīgi apstiprināts! Atliek vien <a href="{{ route('login') }}">pieslēgites</a> un nomainīt noklusējuma paroli.</p>
+                        <p>E-pasts veiksmīgi apstiprināts! Atliek vien <a href="{{ route('login') }}">pieslēgties</a> un nomainīt noklusējuma paroli.</p>
                     </div>
                 </div>
             </div>
