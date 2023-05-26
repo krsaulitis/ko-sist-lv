@@ -2,27 +2,16 @@
 
 namespace App\Http\Controllers\Resources;
 
-use App\Http\Controllers\Events\EventDataRequest;
 use App\Http\Controllers\Resources\Requests\ResourceDataRequest;
 use App\Http\Controllers\Shared\Controller;
 use App\Models\Resource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Str;
 
 class ResourcesApiController extends Controller
 {
     public function create(ResourceDataRequest $request): JsonResponse
     {
-        $fileExtension = $request->file->extension();
-        $fileName = time() . '_' . Str::slug($request->title, '_');
-
-        $filePath = $request
-            ->file('file')
-            ->storeAs('uploads/resources', "$fileName.$fileExtension", 'public');
-
-        $resource = new Resource();
-        $resource->title = $request->title;
-        $resource->path = $filePath;
+        $resource = Resource::fromRequestData($request);
         if (!$resource->save()) {
             return response()->json(['success' => false, 'message' => 'Failed to save resource']);
         }
@@ -30,17 +19,17 @@ class ResourcesApiController extends Controller
         return response()->json(['success' => true, 'data' => $resource]);
     }
 
-    public function update(string $id, EventDataRequest $request): JsonResponse
+    public function update(string $id, ResourceDataRequest $request): JsonResponse
     {
-        /** @var Resource $resource */
-        $resource = Resource::query()->find($id);
-        $resource->title = $request->title;
-        $resource->save();
+        $resource = Resource::fromRequestData($request);
+        if (!$resource->update()) {
+            return response()->json(['success' => false, 'message' => 'Failed to update resource']);
+        }
 
         return response()->json(['success' => true, 'data' => $resource]);
     }
 
-    public function delete(string $id, EventDataRequest $request): JsonResponse
+    public function delete(string $id): JsonResponse
     {
         if (!Resource::query()->find($id)->delete()) {
             return response()->json(['success' => false, 'message' => 'Failed to delete resource']);

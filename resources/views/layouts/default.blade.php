@@ -21,26 +21,22 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
 
-                        <li class="nav-item"><a class="nav-link" href="{{ route('events-list') }}">Kalendārs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('resources-list') }}">Resursi</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('submissions-view') }}">Pieteikumi</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('events-list') }}">Kalendārs</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('users-view') }}">Lietotāji</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('resources-list') }}">Resursi</a>
+                        </li>
+                        @role('admin')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('submissions-list') }}">Pieteikumi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users-list') }}">Lietotāji</a>
+                        </li>
+                        @endrole
 
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
+                        @auth
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -59,7 +55,7 @@
                                     </form>
                                 </div>
                             </li>
-                        @endguest
+                        @endauth
                     </ul>
                 </div>
             </div>

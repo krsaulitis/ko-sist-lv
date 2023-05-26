@@ -1,4 +1,13 @@
-<!-- Fullcalendar -->
+<?php
+
+use App\Models\Event;
+
+/**
+ * @var Event[] $events
+ */
+?>
+
+    <!-- Fullcalendar -->
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.5/index.global.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.5/index.global.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.5/index.global.min.js"></script>
@@ -15,16 +24,18 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 col-12">
-                <div class="col-12 card">
+                <div class="row card">
                     <div class="card-header">Kalendārs</div>
                     <div class="card-body">
                         <div id="calendar"></div>
                     </div>
                 </div>
-                <div class="mt-3">
+                @role('admin')
+                <div class="row mt-3 d-flex flex-row justify-content-end gap-3">
                     <a href="<?= route('events-create') ?>"
-                       class="offset-md-10 col-md-2 btn btn-primary">Pievienot</a>
+                       class="btn btn-primary w-auto">Pievienot</a>
                 </div>
+                @endrole
             </div>
         </div>
     </div>

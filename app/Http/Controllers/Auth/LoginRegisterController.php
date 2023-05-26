@@ -23,30 +23,6 @@ class LoginRegisterController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:50',
-            'surname' => 'required|string|max:50',
-            'email' => 'required|email|max:255|unique:users',
-            'phone_number' => 'required|string|max:12',
-            'former_experience' => 'required|string|max:1000',
-            'motivational_letter' => 'required|string|max:1000',
-        ]);
-
-        AuditionSubmission::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'experience' => $request->former_experience,
-            'motivation' => $request->motivational_letter,
-            'status' => 'pending',
-        ]);
-
-        return redirect()->route('home');
-    }
-
     public function login()
     {
         return view('auth.login');

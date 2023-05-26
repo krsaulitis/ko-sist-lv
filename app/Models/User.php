@@ -4,12 +4,26 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $email_verified_at
+ * @property string $phone
+ * @property string $password
+ * @property string $role
+ * @property string $created_at
+ * @property string $updated_at
+ */
+class User extends BaseUser
 {
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_MEMBER = 'member';
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**

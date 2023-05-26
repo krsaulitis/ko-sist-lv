@@ -1,19 +1,20 @@
 <?php
 
+use App\Models\Resource;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * @var string $search
+ * @var Resource[] $resources
  */
 ?>
-@extends('layouts.default')
 
+@extends('layouts.default')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 col-12">
-                <div class="col-12 card">
+                <div class="row card">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         Resursi
                         <div class="input-group input-group-sm" style="width: 50%;">
@@ -42,12 +43,18 @@ use Illuminate\Support\Facades\Storage;
                                         <td>{{ number_format(Storage::size('public/' . $resource->path) / 1024 / 1024, 2) }}
                                             MB
                                         </td>
-                                        <td style="width: 120px">
-                                            <a href="{{ Storage::url($resource->path) }}" download
+                                        <td style="width: 160px">
+                                            <a href="{{ route('resources-edit', ['id' => $resource->id]) }}"
+                                               class="btn btn-secondary">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a href="{{ Storage::url($resource->path) }}"
+                                               download
                                                class="btn btn-primary">
                                                 <i class="bi bi-download"></i>
                                             </a>
-                                            <button data-id="{{ $resource->id }}" class="btn btn-danger">
+                                            <button data-id="{{ $resource->id }}"
+                                                    class="btn btn-danger delete-action">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </td>
@@ -62,23 +69,28 @@ use Illuminate\Support\Facades\Storage;
                         @endif
                     </div>
                 </div>
-                <div class="mt-3">
+                @role('admin')
+                <div class="row mt-3 d-flex flex-row justify-content-end gap-3">
                     <a href="<?= route('resources-create') ?>"
-                       class="offset-md-10 col-md-2 btn btn-primary">Pievienot</a>
+                       class="btn btn-primary w-auto">Pievienot</a>
                 </div>
+                @endrole
             </div>
         </div>
     </div>
 
     <script>
-        document.querySelectorAll('.delete-resource').forEach(btn => {
+        document.querySelectorAll('.delete-action').forEach(btn => {
             btn.addEventListener('click', function () {
+                if (!confirm('Vai tiešām vēlaties dzēst resursu?')) {
+                    return;
+                }
+
                 let id = this.dataset.id;
-                fetch(`/api/resources/${id}/delete`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                    }
+                fetch("{{ route('api-resources-delete', ['id' => 'id']) }}".replace('id', id), {
+                    method: 'delete',
+                    headers: {'x-csrf-token': "{{ csrf_token() }}"},
+                    credentials: "same-origin",
                 })
                     .then(response => {
                         if (response.ok) {
@@ -97,10 +109,7 @@ use Illuminate\Support\Facades\Storage;
         }
 
         document.querySelector('#search-addon').addEventListener('click', search);
-        document.querySelector('#search-input').addEventListener('keydown', (e) => {
-            if (e.keyCode === 13) {
-                search(e);
-            }
-        });
+        document.querySelector('#search-input').addEventListener('keydown', (e) => e.keyCode === 13 ? search() : '');
+        document.querySelector('#search-input').addEventListener('focusout', search);
     </script>
 @endsection

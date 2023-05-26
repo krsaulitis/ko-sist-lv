@@ -8,10 +8,16 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 abstract class Request extends FormRequest
 {
+    protected bool $isJsonResponse = true;
+
     abstract public function rules(): array;
 
-    protected function failedValidation(Validator $validator)
+    protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException(response()->json($validator->errors(), 422));
+        if ($this->isJsonResponse) {
+            throw new HttpResponseException(response()->json($validator->errors(), 422));
+        } else {
+            parent::failedValidation($validator);
+        }
     }
 }

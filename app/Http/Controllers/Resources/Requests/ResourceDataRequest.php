@@ -6,6 +6,7 @@ use App\Http\Controllers\Shared\Request;
 use Illuminate\Http\UploadedFile;
 
 /**
+ * @property int|null $id
  * @property string $title
  * @property UploadedFile $file
  */

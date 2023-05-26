@@ -14,6 +14,8 @@ use App\Http\Controllers\Shared\Request;
  */
 class AuditionSubmissionCreateRequest extends Request
 {
+    protected bool $isJsonResponse = false;
+
     public function rules(): array
     {
         return [
