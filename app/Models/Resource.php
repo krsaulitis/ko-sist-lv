@@ -27,15 +27,17 @@ class Resource extends Model
         $resource = $request->id ? static::query()->find($request->id) : new static();
         $resource->title = $request->title;
 
-        $filePath = $request
-            ->file('file')
-            ->storeAs(
-                path: 'uploads/resources',
-                name: static::generateFileName($request->title, $request->file->extension()),
-                options: 'public',
-            );
+        if ($request->file) {
+            $filePath = $request
+                ->file('file')
+                ->storeAs(
+                    path: 'uploads/resources',
+                    name: static::generateFileName($request->title, $request->file->extension()),
+                    options: 'public',
+                );
 
-        $resource->path = $filePath;
+            $resource->path = $filePath;
+        }
 
         return $resource;
     }

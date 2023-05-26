@@ -21,11 +21,16 @@ class ResourcesController extends Controller
 
     public function create(): Renderable
     {
-        return view('resources/create');
+        return view('resources/edit', ['resource' => null]);
     }
 
-    public function edit(): Renderable
+    public function edit(string $id): Renderable
     {
-        return view('resources/create');
+        $resource = Resource::query()->find($id);
+        if (!$resource) {
+            abort(404);
+        }
+
+        return view('resources/edit', ['resource' => $resource]);
     }
 }

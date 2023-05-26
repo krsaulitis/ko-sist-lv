@@ -12,11 +12,13 @@ use Illuminate\Http\UploadedFile;
  */
 class ResourceDataRequest extends Request
 {
+    protected bool $isJsonResponse = false;
+
     public function rules(): array
     {
         return [
             'title' => 'required|string|max:255',
-            'file' => 'required|mimes:jpg,png,pdf|max:2048',
+            'file' => 'required_if:_method,post|nullable|mimes:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 }

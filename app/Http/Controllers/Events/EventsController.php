@@ -31,6 +31,9 @@ class EventsController extends Controller
     public function edit(string $id): Renderable
     {
         $event = Event::query()->find($id);
+        if (!$event) {
+            abort(404);
+        }
 
         return view('events/edit', ['event' => $event, 'resources' => $this->getAllResources()]);
     }

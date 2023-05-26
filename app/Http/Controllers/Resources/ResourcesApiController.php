@@ -6,27 +6,28 @@ use App\Http\Controllers\Resources\Requests\ResourceDataRequest;
 use App\Http\Controllers\Shared\Controller;
 use App\Models\Resource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 class ResourcesApiController extends Controller
 {
-    public function create(ResourceDataRequest $request): JsonResponse
+    public function create(ResourceDataRequest $request): RedirectResponse
     {
         $resource = Resource::fromRequestData($request);
         if (!$resource->save()) {
-            return response()->json(['success' => false, 'message' => 'Failed to save resource']);
+            return back()->withErrors(['general' => 'Kaut kas nogāja greizi. Lūdzu mēģini vēlāk.']);
         }
 
-        return response()->json(['success' => true, 'data' => $resource]);
+        return redirect()->route('resources-list');
     }
 
-    public function update(string $id, ResourceDataRequest $request): JsonResponse
+    public function update(string $id, ResourceDataRequest $request): RedirectResponse
     {
         $resource = Resource::fromRequestData($request);
         if (!$resource->update()) {
-            return response()->json(['success' => false, 'message' => 'Failed to update resource']);
+            return back()->withErrors(['general' => 'Kaut kas nogāja greizi. Lūdzu mēģini vēlāk.']);
         }
 
-        return response()->json(['success' => true, 'data' => $resource]);
+        return redirect()->route('resources-list');
     }
 
     public function delete(string $id): JsonResponse
