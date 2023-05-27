@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-xl-4 col-lg-6 col-md-8 col-12">
-                <div class="row card">
+                <div class="card">
                     <div class="card-header">Mainīt paroli</div>
                     <div class="card-body">
                         <form action="{{ route('api-auth-login') }}" method="post">

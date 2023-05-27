@@ -19,7 +19,7 @@ use App\Models\Event;
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-8 col-md-10 col-12">
-                <div class="row card">
+                <div class="card">
                     <div class="card-header">{{$event?->title ?? 'Jauns notikums'}}</div>
                     <div class="card-body">
                         <form class="row g-3 needs-validation"

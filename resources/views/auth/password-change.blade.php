@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
-@section('body')
+@section('content')
     <div class="container">
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center">
             <div class="col-xl-4 col-lg-6 col-md-8 col-12">
-                <div class="row card">
+                <div class="card">
                     <div class="card-header">Paroles maiņa</div>
                     <div class="card-body">
                         <form action="{{ route('api-auth-password-change') }}" method="post">

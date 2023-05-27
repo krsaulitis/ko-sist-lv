@@ -24,14 +24,14 @@ use App\Models\Event;
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-10 col-12">
-                <div class="row card">
+                <div class="card">
                     <div class="card-header">Kalendārs</div>
                     <div class="card-body">
                         <div id="calendar"></div>
                     </div>
                 </div>
                 @role('admin')
-                <div class="row mt-3 d-flex flex-row justify-content-end gap-3">
+                <div class="mt-3 d-flex flex-row justify-content-end gap-3">
                     <a href="<?= route('events-create') ?>"
                        class="btn btn-primary w-auto">Pievienot</a>
                 </div>

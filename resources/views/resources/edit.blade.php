@@ -11,9 +11,9 @@ use App\Models\Resource;
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8 col-lg-6">
                 <div class="card">
-                    <div class="card-header">Jauns resurss</div>
+                    <div class="card-header">{{ $resource?->title ?? "Jauns resurss" }}</div>
                     <div class="card-body">
                         <form class="row g-3 needs-validation"
                               method="post"

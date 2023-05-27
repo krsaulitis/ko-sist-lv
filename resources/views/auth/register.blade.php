@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-xl-6 col-lg-8 col-md-10 col-12">
-                <div class="row card">
+                <div class="card">
                     <div class="card-header">Pieteikuma izveide</div>
                     <div class="card-body">
                         <form action="{{ route('api-auth-register') }}" method="post">
