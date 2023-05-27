@@ -1,9 +1,7 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @var User[] $users
@@ -19,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
             <div class="col-lg-8 col-md-10 col-12">
                 <div class="col-12 card">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                        Pieteikumi
+                        Lietotāji
                     </div>
                     <div class="card-body">
 
@@ -36,6 +34,7 @@ use Illuminate\Support\Facades\Storage;
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->displayRole() }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td style="width: 120px">

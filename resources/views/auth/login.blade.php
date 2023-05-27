@@ -10,8 +10,7 @@
                         <form action="{{ route('api-auth-login') }}" method="post">
                             @csrf
                             <div class="mb-3 row">
-                                <label for="email" class="col-md-4 col-form-label text-md-end text-start">E-pasts
-                                    Address</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-end text-start">E-pasts</label>
                                 <div class="col-md-6">
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                                            id="email"

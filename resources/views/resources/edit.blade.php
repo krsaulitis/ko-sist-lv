@@ -3,7 +3,7 @@
 use App\Models\Resource;
 
 /**
- * @var Resource $resource
+ * @var Resource|null $resource
  */
 ?>
 @extends('layouts.default')
@@ -24,10 +24,10 @@ use App\Models\Resource;
 
                             <div class="col-md-6">
                                 <label class="form-label"
-                                       for="title">Nosukums</label>
+                                       for="title">Nosaukums</label>
                                 <input type="text"
                                        class="form-control @error('title') is-invalid @enderror"
-                                       id="title" name="title" value="{{ old('title') ?? $resource->title }}">
+                                       id="title" name="title" value="{{ old('title') ?? $resource?->title }}">
                                 @if ($errors->has('title'))
                                     <span class="text-danger">{{ $errors->first('title') }}</span>
                                 @endif

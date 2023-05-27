@@ -61,4 +61,12 @@ class User extends BaseUser
     {
         $this->password = Hash::make($password);
     }
+
+    public function displayRole(): string
+    {
+        return match ($this->role) {
+            self::ROLE_ADMIN => 'Administrators',
+            self::ROLE_MEMBER => 'Dalībnieks',
+        };
+    }
 }
