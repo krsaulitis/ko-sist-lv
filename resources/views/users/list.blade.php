@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
                             <thead>
                             <tr>
                                 <th scope="col">Vārds</th>
+                                <th scope="col">Loma</th>
                                 <th scope="col">E-pasts</th>
                                 <th scope="col">Telefona nr.</th>
                                 <th scope="col"></th>
