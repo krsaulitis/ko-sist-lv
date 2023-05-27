@@ -5,7 +5,7 @@
         <div class="row justify-content-center mt-5">
             <div class="col-xl-4 col-lg-6 col-md-8 col-12">
                 <div class="card">
-                    <div class="card-header">Mainīt paroli</div>
+                    <div class="card-header">Pieslēgties</div>
                     <div class="card-body">
                         <form action="{{ route('api-auth-login') }}" method="post">
                             @csrf
@@ -40,7 +40,7 @@
                             </div>
                             <div class="mb-3 row text-center text-md-start offset-md-4 ps-md-2">
                                 <p class="p-0 m-0">Vēlies dziedāt?
-                                    <a href="{{ route('register') }}">Pievienojies</a></p>
+                                    <a href="{{ route('register') }}">Pievienojies mums</a></p>
                             </div>
                         </form>
                     </div>
