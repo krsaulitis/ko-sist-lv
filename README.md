@@ -1,5 +1,13 @@
 # Korvadības sistēma - kosist.lv
 
+## Documents
+- Mājaslapa: https://kosist.saulitis.dev
+    - **Admin credentials**
+    - Username: admin@test.com
+    - Password: option123
+- Sākotnējais dokuments: https://docs.google.com/document/d/1SRhEzSGWGs_138FUkqPDfD_ZpUUJL3FhAieG0tFNX1s/edit#
+- Esošais dizaina apraksts: https://docs.google.com/document/d/1VqbX0v-3tz63FEKzLHdGlzlUp6WPW3DllULLItIK_jA/edit#
+
 ## Prerequisites
 ### Windows
 1. Download and install Docker from https://www.docker.com/
