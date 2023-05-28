@@ -36,3 +36,9 @@
 1. Edit `/etc/hosts` (Linux or macOS) or `C:\Windows\System32\drivers\etc\hosts` (Windows)
 2. Add `127.0.0.1 kosist.test` at the end of the file
 3. Open https://kosist.test from browser of choice
+
+#### * Sākotnējais dokuments:
+https://docs.google.com/document/d/1SRhEzSGWGs_138FUkqPDfD_ZpUUJL3FhAieG0tFNX1s/edit#
+
+#### * Esošais dizaina apraksts:
+https://docs.google.com/document/d/1VqbX0v-3tz63FEKzLHdGlzlUp6WPW3DllULLItIK_jA/edit#
