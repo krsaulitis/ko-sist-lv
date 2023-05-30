@@ -16,7 +16,7 @@ use App\Models\AuditionSubmission;
                     <div class="card-header d-flex align-items-center justify-content-between">
                         Pieteikumi
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column gap-3">
                         @if($submissions)
                             @foreach($submissions as $submission)
                                 <div class="card">

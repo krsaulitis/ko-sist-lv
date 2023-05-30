@@ -117,19 +117,19 @@ use App\Models\Event;
             $('input[name="dates"]').daterangepicker({
                 timePicker: true,
                 timePicker24Hour: true,
-                startDate: "{{ $event?->datetime_from ?? date('Y-m-d H:i:s')}}",
-                endDate: "{{ $event?->datetime_to ?? date('Y-m-d H:i:s') }}",
+                startDate: "{{ old('datetime_from') ?? $event?->datetime_from ?? date('Y-m-d H:i:s')}}",
+                endDate: "{{ old('datetime_to') ?? $event?->datetime_to ?? date('Y-m-d H:i:s') }}",
                 locale: {
-                    format: 'Y-MM-D HH:mm'
+                    format: 'YYYY-MM-DD HH:mm'
                 },
 
             });
             const datepicker = $('input[name="dates"]').data('daterangepicker');
 
             document.querySelector('form')
-                .addEventListener('submit', async function (e) {
-                    dateFromInput.val(datepicker.startDate.format('Y-MM-D HH:mm:ss'));
-                    dateToInput.val(datepicker.endDate.format('Y-MM-D HH:mm:ss'))
+                .addEventListener('submit', async function () {
+                    dateFromInput.val(datepicker.startDate.format('YYYY-MM-DD HH:mm:ss'));
+                    dateToInput.val(datepicker.endDate.format('YYYY-MM-DD HH:mm:ss'))
                 });
         });
     </script>
